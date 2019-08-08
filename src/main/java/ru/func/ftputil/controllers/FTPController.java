@@ -1,4 +1,4 @@
-package ru.func.ftputil;
+package ru.func.ftputil.controllers;
 
 import java.io.BufferedOutputStream;
 import java.io.File;

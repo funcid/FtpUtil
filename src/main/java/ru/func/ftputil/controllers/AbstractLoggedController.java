@@ -1,4 +1,4 @@
-package ru.func.ftputil;
+package ru.func.ftputil.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
