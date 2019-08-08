@@ -14,6 +14,9 @@ import org.apache.commons.net.ftp.FTPClient;
 
 public class Controller {
 
+    private FTPClient client;
+    private Stage stage;
+
     @FXML
     private TextArea loggerView;
     @FXML
@@ -28,14 +31,13 @@ public class Controller {
     @FXML
     void initialize() {
         this.openConnectionButton.setOnAction(event -> {
-            FTPClient client = Main.getInstance().getClient();
             try {
                 if (this.hostInput.getText().isEmpty()) {
                     return;
                 }
                 this.loggerView.appendText(this.getPreDate() + "Попытка соеденения по стандартному порту.");
                 try {
-                    Main.getInstance().getClient().connect(this.hostInput.getText());
+                    client.connect(this.hostInput.getText());
                 }
                 catch (Exception ignored) {
                     client.connect(this.hostInput.getText(), 2221);
@@ -47,9 +49,14 @@ public class Controller {
                         client.enterLocalPassiveMode();
                         client.setAutodetectUTF8(true);
                         this.openConnectionButton.getScene().getWindow().hide();
-                        FXMLLoader loader = new FXMLLoader();
-                        loader.setLocation(this.getClass().getResource("/ru/func/ftputil/app.fxml"));
+
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/func/ftputil/app.fxml"));
                         loader.load();
+
+                        FTPController controller = loader.getController();
+                        controller.setStage(stage);
+                        controller.setClient(client);
+
                         Stage stage = new Stage();
                         stage.setScene(new Scene(loader.getRoot()));
                         stage.showAndWait();
@@ -71,10 +78,18 @@ public class Controller {
                 }
                 catch (IOException ex) {
                     this.loggerView.appendText(this.getPreDate() + "Ошибка авто-выхода: " + ex.getMessage());
+                    ex.printStackTrace();
                 }
             }
-        }
-        );
+        });
+    }
+
+    public void setClient(FTPClient client) {
+        this.client = client;
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
     }
 
     private String getPreDate() {

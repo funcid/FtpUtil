@@ -12,6 +12,8 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+import org.apache.commons.net.ftp.FTPClient;
 
 public class FTPController {
 
@@ -34,15 +36,19 @@ public class FTPController {
     private File sendFile;
     private File getFile;
 
+    private Stage stage;
+    private FTPClient client;
+
+
     @FXML
     void initialize() {
         this.loggerView.appendText(this.getPreDate() + "Соединение прошло успешно.");
         this.localFileButton.setOnAction(event -> {
-            this.sendFile = this.fileChooser.showOpenDialog(Main.getInstance().getStage());
+            this.sendFile = this.fileChooser.showOpenDialog(stage);
         }
         );
         this.localDirButton.setOnAction(event -> {
-            this.getFile = this.directoryChooser.showDialog(Main.getInstance().getStage());
+            this.getFile = this.directoryChooser.showDialog(stage);
         }
         );
         this.pushFileButton.setOnAction(event -> {
@@ -69,7 +75,7 @@ public class FTPController {
     private void sendFileToServerByPath(String uploadDir, String path) throws IOException {
         FileInputStream inputStream = new FileInputStream(new File(path));
         this.loggerView.appendText(this.getPreDate() + "Началась загрузка файла на сервер.");
-        if (Main.getInstance().getClient().storeFile(uploadDir + "/" + path.split("/")[path.split("/").length - 1], inputStream)) {
+        if (client.storeFile(uploadDir + "/" + path.split("/")[path.split("/").length - 1], inputStream)) {
             this.loggerView.appendText(this.getPreDate() + "Загрузка завершена успешно.");
         }
         inputStream.close();
@@ -78,7 +84,7 @@ public class FTPController {
     private void getFileFromServerByPath(String path, String loadDir) throws IOException {
         BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(loadDir + "/" + path.split("/")[path.split("/").length - 1]));
         this.loggerView.appendText(this.getPreDate() + "Начало выгрузки...");
-        if (Main.getInstance().getClient().retrieveFile(path, outputStream)) {
+        if (client.retrieveFile(path, outputStream)) {
             this.loggerView.appendText(this.getPreDate() + "Файл ушспешно скачан.");
         }
         outputStream.close();
@@ -87,6 +93,14 @@ public class FTPController {
     private String getPreDate() {
         Date date = new Date();
         return "\n[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] ";
+    }
+
+    public void setStage(Stage stage) {
+        this.stage = stage;
+    }
+
+    public void setClient(FTPClient client) {
+        this.client = client;
     }
 }
 

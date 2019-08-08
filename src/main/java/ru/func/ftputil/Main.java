@@ -7,36 +7,24 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.apache.commons.net.ftp.FTPClient;
 
-public class Main
-extends Application {
-    private final FTPClient CLIENT = new FTPClient();
-    private Stage STAGE;
-    private static Main instance;
+public class Main extends Application {
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(this.getClass().getResource("sample.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("sample.fxml"));
+        Parent root = loader.load();
+
+        Controller controller = loader.getController();
+        controller.setStage(primaryStage);
+        controller.setClient(new FTPClient());
+
         primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));
         primaryStage.setResizable(false);
         primaryStage.show();
-        this.STAGE = primaryStage;
-        instance = this;
     }
 
     public static void main(String[] args) {
         Main.launch((String[])args);
-    }
-
-    public static Main getInstance() {
-        return instance;
-    }
-
-    public FTPClient getClient() {
-        return this.CLIENT;
-    }
-
-    public Stage getStage() {
-        return this.STAGE;
     }
 }
 
