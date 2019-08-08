@@ -14,7 +14,7 @@ public abstract class AbstractLoggedController {
     @FXML
     protected TextArea loggerView;
 
-    void log(String text) {
+    public void log(String text) {
         loggerView.appendText("[" + DTF.format(Instant.now()) + "] " + text + "\n");
     }
 }
