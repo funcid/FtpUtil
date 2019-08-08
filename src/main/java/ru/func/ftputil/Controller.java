@@ -1,21 +1,3 @@
-/*
- * Decompiled with CFR 0_125.
- * 
- * Could not load the following classes:
- *  javafx.event.ActionEvent
- *  javafx.event.Event
- *  javafx.event.EventHandler
- *  javafx.fxml.FXML
- *  javafx.fxml.FXMLLoader
- *  javafx.scene.Parent
- *  javafx.scene.Scene
- *  javafx.scene.control.Button
- *  javafx.scene.control.PasswordField
- *  javafx.scene.control.TextArea
- *  javafx.scene.control.TextField
- *  javafx.stage.Stage
- *  javafx.stage.Window
- */
 package ru.func.ftputil;
 
 import java.io.IOException;

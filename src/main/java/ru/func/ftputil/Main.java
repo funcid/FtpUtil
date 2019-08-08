@@ -1,13 +1,3 @@
-/*
- * Decompiled with CFR 0_125.
- * 
- * Could not load the following classes:
- *  javafx.application.Application
- *  javafx.fxml.FXMLLoader
- *  javafx.scene.Parent
- *  javafx.scene.Scene
- *  javafx.stage.Stage
- */
 package ru.func.ftputil;
 
 import java.net.URL;
