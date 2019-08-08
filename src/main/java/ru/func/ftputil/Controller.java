@@ -15,40 +15,46 @@ import org.apache.commons.net.ftp.FTPClient;
 public class Controller {
 
     private FTPClient client;
+
     private Stage stage;
 
     @FXML
     private TextArea loggerView;
+
     @FXML
     private TextField hostInput;
+
     @FXML
     private Button openConnectionButton;
+
     @FXML
     private TextField userInput;
+
     @FXML
     private PasswordField passwordInput;
 
     @FXML
     void initialize() {
-        this.openConnectionButton.setOnAction(event -> {
+        openConnectionButton.setOnAction(event -> {
             try {
-                if (this.hostInput.getText().isEmpty()) {
+                if (hostInput.getText().isEmpty()) {
                     return;
                 }
-                this.loggerView.appendText(this.getPreDate() + "Попытка соеденения по стандартному порту.");
+
+                loggerView.appendText(getPreDate() + "Попытка соеденения по стандартному порту.");
+
                 try {
-                    client.connect(this.hostInput.getText());
-                }
-                catch (Exception ignored) {
-                    client.connect(this.hostInput.getText(), 2221);
-                }
-                finally {
-                    if (client.login(this.userInput.getText(), this.passwordInput.getText())) {
+                    client.connect(hostInput.getText());
+                } catch (Exception ignored) {
+                    client.connect(hostInput.getText(), 2221);
+                } finally {
+                    if (client.login(userInput.getText(), passwordInput.getText())) {
                         client.enterLocalPassiveMode();
                         client.setFileType(2);
                         client.enterLocalPassiveMode();
                         client.setAutodetectUTF8(true);
-                        this.openConnectionButton.getScene().getWindow().hide();
+
+                        openConnectionButton.getScene().getWindow().hide();
 
                         FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/app.fxml"));
                         loader.load();
@@ -61,12 +67,11 @@ public class Controller {
                         stage.setScene(new Scene(loader.getRoot()));
                         stage.showAndWait();
                     } else {
-                        this.loggerView.appendText(this.getPreDate() + "Неверные данные.");
+                        loggerView.appendText(getPreDate() + "Неверные данные.");
                     }
                 }
-            }
-            catch (IOException ex) {
-                this.loggerView.appendText(this.getPreDate() + "Ошибка подключения: " + ex.getMessage());
+            } catch (IOException ex) {
+                loggerView.appendText(getPreDate() + "Ошибка подключения: " + ex.getMessage());
                 ex.printStackTrace();
             }
             finally {
@@ -75,9 +80,8 @@ public class Controller {
                         client.logout();
                         client.disconnect();
                     }
-                }
-                catch (IOException ex) {
-                    this.loggerView.appendText(this.getPreDate() + "Ошибка авто-выхода: " + ex.getMessage());
+                } catch (IOException ex) {
+                    loggerView.appendText(getPreDate() + "Ошибка авто-выхода: " + ex.getMessage());
                     ex.printStackTrace();
                 }
             }
@@ -97,4 +101,3 @@ public class Controller {
         return "\n[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] ";
     }
 }
-
