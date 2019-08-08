@@ -50,7 +50,7 @@ public class Controller {
                         client.setAutodetectUTF8(true);
                         this.openConnectionButton.getScene().getWindow().hide();
 
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ru/func/ftputil/app.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/app.fxml"));
                         loader.load();
 
                         FTPController controller = loader.getController();
