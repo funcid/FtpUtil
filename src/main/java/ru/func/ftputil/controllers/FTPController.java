@@ -56,8 +56,8 @@ public class FTPController extends AbstractLoggedController {
             try {
                 sendFileToServerByPath(dirInput.getText(), sendFile.getPath());
             } catch (IOException e) {
+                log("Ошибка загрузки: " + e.getMessage());
                 e.printStackTrace();
-                log("Ошибка загрузки.");
             }
         });
 
@@ -65,7 +65,8 @@ public class FTPController extends AbstractLoggedController {
             try {
                 getFileFromServerByPath(fileInput.getText(), getFile.getPath());
             } catch (IOException e) {
-                log("Ошибка выгрузки.");
+                log("Ошибка выгрузки: " + e.getMessage());
+                e.printStackTrace();
             }
         });
     }
