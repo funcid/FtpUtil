@@ -1,25 +1,20 @@
 package ru.func.ftputil;
 
 import java.io.IOException;
-import java.util.Date;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import org.apache.commons.net.ftp.FTPClient;
 
-public class Controller {
+public class Controller extends AbstractLoggedController {
 
     private FTPClient client;
 
     private Stage stage;
-
-    @FXML
-    private TextArea loggerView;
 
     @FXML
     private TextField hostInput;
@@ -41,7 +36,7 @@ public class Controller {
                     return;
                 }
 
-                loggerView.appendText(getPreDate() + "Попытка соеденения по стандартному порту.");
+                log("Попытка соеденения по стандартному порту.");
 
                 try {
                     client.connect(hostInput.getText());
@@ -67,11 +62,11 @@ public class Controller {
                         stage.setScene(new Scene(loader.getRoot()));
                         stage.showAndWait();
                     } else {
-                        loggerView.appendText(getPreDate() + "Неверные данные.");
+                        log("Неверные данные.");
                     }
                 }
             } catch (IOException ex) {
-                loggerView.appendText(getPreDate() + "Ошибка подключения: " + ex.getMessage());
+                log("Ошибка подключения: " + ex.getMessage());
                 ex.printStackTrace();
             }
             finally {
@@ -81,7 +76,7 @@ public class Controller {
                         client.disconnect();
                     }
                 } catch (IOException ex) {
-                    loggerView.appendText(getPreDate() + "Ошибка авто-выхода: " + ex.getMessage());
+                    log("Ошибка авто-выхода: " + ex.getMessage());
                     ex.printStackTrace();
                 }
             }
@@ -94,10 +89,5 @@ public class Controller {
 
     public void setStage(Stage stage) {
         this.stage = stage;
-    }
-
-    private String getPreDate() {
-        Date date = new Date();
-        return "\n[" + date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "] ";
     }
 }
