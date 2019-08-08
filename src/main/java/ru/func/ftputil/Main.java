@@ -1,6 +1,5 @@
 package ru.func.ftputil;
 
-import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,7 +14,7 @@ extends Application {
     private static Main instance;
 
     public void start(Stage primaryStage) throws Exception {
-        Parent root = (Parent)FXMLLoader.load((URL)this.getClass().getResource("sample.fxml"));
+        Parent root = FXMLLoader.load(this.getClass().getResource("sample.fxml"));
         primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));
         primaryStage.setResizable(false);

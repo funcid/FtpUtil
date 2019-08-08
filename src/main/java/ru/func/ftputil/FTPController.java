@@ -5,30 +5,16 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.URL;
 import java.util.Date;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.apache.commons.net.ftp.FTPClient;
-import ru.func.ftputil.Main;
 
 public class FTPController {
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
+
     @FXML
     private TextArea loggerView;
     @FXML
@@ -52,17 +38,16 @@ public class FTPController {
     void initialize() {
         this.loggerView.appendText(this.getPreDate() + "Соединение прошло успешно.");
         this.localFileButton.setOnAction(event -> {
-            this.sendFile = this.fileChooser.showOpenDialog((Window)Main.getInstance().getStage());
+            this.sendFile = this.fileChooser.showOpenDialog(Main.getInstance().getStage());
         }
         );
         this.localDirButton.setOnAction(event -> {
-            this.getFile = this.directoryChooser.showDialog((Window)Main.getInstance().getStage());
+            this.getFile = this.directoryChooser.showDialog(Main.getInstance().getStage());
         }
         );
         this.pushFileButton.setOnAction(event -> {
             try {
                 this.sendFileToServerByPath(this.dirInput.getText(), this.sendFile.getPath());
-                return;
             }
             catch (IOException e) {
                 e.printStackTrace();
@@ -73,7 +58,6 @@ public class FTPController {
         this.getFileButton.setOnAction(event -> {
             try {
                 this.getFileFromServerByPath(this.fileInput.getText(), this.getFile.getPath());
-                return;
             }
             catch (IOException e) {
                 this.loggerView.appendText(this.getPreDate() + "Ошибка выгрузки.");

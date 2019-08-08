@@ -1,30 +1,19 @@
 package ru.func.ftputil;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Date;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 import org.apache.commons.net.ftp.FTPClient;
-import ru.func.ftputil.Main;
 
 public class Controller {
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
+
     @FXML
     private TextArea loggerView;
     @FXML
@@ -47,11 +36,9 @@ public class Controller {
                 this.loggerView.appendText(this.getPreDate() + "Попытка соеденения по стандартному порту.");
                 try {
                     Main.getInstance().getClient().connect(this.hostInput.getText());
-                    return;
                 }
                 catch (Exception ignored) {
                     client.connect(this.hostInput.getText(), 2221);
-                    return;
                 }
                 finally {
                     if (client.login(this.userInput.getText(), this.passwordInput.getText())) {
@@ -64,7 +51,7 @@ public class Controller {
                         loader.setLocation(this.getClass().getResource("/ru/func/ftputil/app.fxml"));
                         loader.load();
                         Stage stage = new Stage();
-                        stage.setScene(new Scene((Parent)loader.getRoot()));
+                        stage.setScene(new Scene(loader.getRoot()));
                         stage.showAndWait();
                     } else {
                         this.loggerView.appendText(this.getPreDate() + "Неверные данные.");
@@ -74,7 +61,6 @@ public class Controller {
             catch (IOException ex) {
                 this.loggerView.appendText(this.getPreDate() + "Ошибка подключения: " + ex.getMessage());
                 ex.printStackTrace();
-                return;
             }
             finally {
                 try {
