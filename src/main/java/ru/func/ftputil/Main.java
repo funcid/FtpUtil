@@ -26,7 +26,7 @@ extends Application {
 
     public void start(Stage primaryStage) throws Exception {
         Parent root = (Parent)FXMLLoader.load((URL)this.getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("\u041f\u0440\u043e\u0435\u043a\u0442 \u0410\u0440\u0442\u0435\u043c\u0430 \u0426\u0430\u0440\u044e\u043a\u0430 10 \u043a\u043b\u0430\u0441\u0441");
+        primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));
         primaryStage.setResizable(false);
         primaryStage.show();

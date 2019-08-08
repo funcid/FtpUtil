@@ -62,7 +62,7 @@ public class Controller {
                 if (this.hostInput.getText().isEmpty()) {
                     return;
                 }
-                this.loggerView.appendText(this.getPreDate() + "\u041f\u043e\u043f\u044b\u0442\u043a\u0430 \u0441\u043e\u0435\u0434\u0435\u043d\u0435\u043d\u0438\u044f \u043f\u043e \u0441\u0442\u0430\u043d\u0434\u0430\u0440\u0442\u043d\u043e\u043c\u0443 \u043f\u043e\u0440\u0442\u0443.");
+                this.loggerView.appendText(this.getPreDate() + "Попытка соеденения по стандартному порту.");
                 try {
                     Main.getInstance().getClient().connect(this.hostInput.getText());
                     return;
@@ -85,12 +85,12 @@ public class Controller {
                         stage.setScene(new Scene((Parent)loader.getRoot()));
                         stage.showAndWait();
                     } else {
-                        this.loggerView.appendText(this.getPreDate() + "\u041d\u0435\u0432\u0435\u0440\u043d\u044b\u0435 \u0434\u0430\u043d\u043d\u044b\u0435.");
+                        this.loggerView.appendText(this.getPreDate() + "Неверные данные.");
                     }
                 }
             }
             catch (IOException ex) {
-                this.loggerView.appendText(this.getPreDate() + "\u041e\u0448\u0438\u0431\u043a\u0430 \u043f\u043e\u0434\u043a\u043b\u044e\u0447\u0435\u043d\u0438\u044f: " + ex.getMessage());
+                this.loggerView.appendText(this.getPreDate() + "Ошибка подключения: " + ex.getMessage());
                 ex.printStackTrace();
                 return;
             }
@@ -102,7 +102,7 @@ public class Controller {
                     }
                 }
                 catch (IOException ex) {
-                    this.loggerView.appendText(this.getPreDate() + "\u041e\u0448\u0438\u0431\u043a\u0430 \u0430\u0432\u0442\u043e-\u0432\u044b\u0445\u043e\u0434\u0430: " + ex.getMessage());
+                    this.loggerView.appendText(this.getPreDate() + "Ошибка авто-выхода: " + ex.getMessage());
                 }
             }
         }

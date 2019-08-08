@@ -66,7 +66,7 @@ public class FTPController {
 
     @FXML
     void initialize() {
-        this.loggerView.appendText(this.getPreDate() + "\u0421\u043e\u0435\u0434\u0438\u043d\u0435\u043d\u0438\u0435 \u043f\u0440\u043e\u0448\u043b\u043e \u0443\u0441\u043f\u0435\u0448\u043d\u043e.");
+        this.loggerView.appendText(this.getPreDate() + "Соединение прошло успешно.");
         this.localFileButton.setOnAction(event -> {
             this.sendFile = this.fileChooser.showOpenDialog((Window)Main.getInstance().getStage());
         }
@@ -82,7 +82,7 @@ public class FTPController {
             }
             catch (IOException e) {
                 e.printStackTrace();
-                this.loggerView.appendText(this.getPreDate() + "\u041e\u0448\u0438\u0431\u043a\u0430 \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0438.");
+                this.loggerView.appendText(this.getPreDate() + "Ошибка загрузки.");
             }
         }
         );
@@ -92,7 +92,7 @@ public class FTPController {
                 return;
             }
             catch (IOException e) {
-                this.loggerView.appendText(this.getPreDate() + "\u041e\u0448\u0438\u0431\u043a\u0430 \u0432\u044b\u0433\u0440\u0443\u0437\u043a\u0438.");
+                this.loggerView.appendText(this.getPreDate() + "Ошибка выгрузки.");
             }
         }
         );
@@ -100,18 +100,18 @@ public class FTPController {
 
     private void sendFileToServerByPath(String uploadDir, String path) throws IOException {
         FileInputStream inputStream = new FileInputStream(new File(path));
-        this.loggerView.appendText(this.getPreDate() + "\u041d\u0430\u0447\u0430\u043b\u0430\u0441\u044c \u0437\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0444\u0430\u0439\u043b\u0430 \u043d\u0430 \u0441\u0435\u0440\u0432\u0435\u0440.");
+        this.loggerView.appendText(this.getPreDate() + "Началась загрузка файла на сервер.");
         if (Main.getInstance().getClient().storeFile(uploadDir + "/" + path.split("/")[path.split("/").length - 1], inputStream)) {
-            this.loggerView.appendText(this.getPreDate() + "\u0417\u0430\u0433\u0440\u0443\u0437\u043a\u0430 \u0437\u0430\u0432\u0435\u0440\u0448\u0435\u043d\u0430 \u0443\u0441\u043f\u0435\u0448\u043d\u043e.");
+            this.loggerView.appendText(this.getPreDate() + "Загрузка завершена успешно.");
         }
         inputStream.close();
     }
 
     private void getFileFromServerByPath(String path, String loadDir) throws IOException {
         BufferedOutputStream outputStream = new BufferedOutputStream(new FileOutputStream(loadDir + "/" + path.split("/")[path.split("/").length - 1]));
-        this.loggerView.appendText(this.getPreDate() + "\u041d\u0430\u0447\u0430\u043b\u043e \u0432\u044b\u0433\u0440\u0443\u0437\u043a\u0438...");
+        this.loggerView.appendText(this.getPreDate() + "Начало выгрузки...");
         if (Main.getInstance().getClient().retrieveFile(path, outputStream)) {
-            this.loggerView.appendText(this.getPreDate() + "\u0424\u0430\u0439\u043b \u0443\u0448\u0441\u043f\u0435\u0448\u043d\u043e \u0441\u043a\u0430\u0447\u0430\u043d.");
+            this.loggerView.appendText(this.getPreDate() + "Файл ушспешно скачан.");
         }
         outputStream.close();
     }
