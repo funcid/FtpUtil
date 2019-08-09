@@ -36,6 +36,9 @@ public class Controller extends AbstractLoggedController {
     @FXML
     private PasswordField passwordInput;
 
+    @FXML
+    private Button clearButton;
+
     public Controller() {
         setLogger(log);
     }
@@ -70,6 +73,8 @@ public class Controller extends AbstractLoggedController {
                 }
             }
         });
+
+        clearButton.setOnAction(event -> loggerView.clear());
     }
 
     public void setFtpService(FtpService service) {

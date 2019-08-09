@@ -63,6 +63,9 @@ public class FTPController extends AbstractLoggedController {
     @FXML
     private Button clearButton;
 
+    @FXML
+    private Button deleteFileButton;
+
     public FTPController() {
         setLogger(log);
     }
@@ -92,6 +95,7 @@ public class FTPController extends AbstractLoggedController {
         });
 
         clearButton.setOnAction(event -> loggerView.clear());
+        deleteFileButton.setOnAction(event -> removeServerFile(fileInput.getText()));
     }
 
     void setStage(Stage stage) {
@@ -142,7 +146,15 @@ public class FTPController extends AbstractLoggedController {
         }
     }
 
-    private String getFileNameFromPath(String path) {
+    private void removeServerFile(final String path) {
+        if (service.removeServerFile(path)) {
+            log("Файл был успешно удален.");
+        } else {
+            log("Ошибка удаления файла.");
+        }
+    }
+
+    private String getFileNameFromPath(final String path) {
         Matcher matcher = Pattern.compile("/(.+?)$").matcher(path);
         if (matcher.find()) {
             return matcher.group(1);

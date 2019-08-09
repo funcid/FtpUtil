@@ -99,4 +99,13 @@ public class FtpService {
         }
         return new String[] {"Директория не содержит файлов."};
     }
+
+    public boolean removeServerFile(final String path) {
+        try {
+            return client.deleteFile(path);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }
