@@ -14,11 +14,26 @@
         <java.version>1.8</java.version>
         <project.build.sourceEncoding>${java.encoding}</project.build.sourceEncoding>
         <project.reporting.outputEncoding>${java.encoding}</project.reporting.outputEncoding>
+
+        <slf4j.version>1.7.25</slf4j.version>
         
         <main.class>ru.func.ftputil.Main</main.class>
     </properties>
 
     <dependencies>
+        <!-- LOGGER -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+
+        <!-- COMPONENTS -->
         <dependency>
             <groupId>commons-net</groupId>
             <artifactId>commons-net</artifactId>

@@ -2,6 +2,7 @@ package ru.func.ftputil.controllers;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import org.slf4j.Logger;
 
 import java.time.Instant;
 import java.time.ZoneId;
@@ -14,7 +15,14 @@ public abstract class AbstractLoggedController {
     @FXML
     protected TextArea loggerView;
 
+    private Logger logger;
+
     public void log(String text) {
+        logger.info(text);
         loggerView.appendText("[" + DTF.format(Instant.now()) + "] " + text + "\n");
+    }
+
+    public void setLogger(Logger logger) {
+        this.logger = logger;
     }
 }

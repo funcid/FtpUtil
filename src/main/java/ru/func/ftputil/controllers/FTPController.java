@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.func.ftputil.services.FtpService;
 import ru.func.ftputil.services.exceptions.FtpRetrieveFileException;
 import ru.func.ftputil.services.exceptions.FtpSendFileException;
@@ -15,6 +17,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FTPController extends AbstractLoggedController {
+
+    private static final Logger log = LoggerFactory.getLogger(FTPController.class);
 
     private final FileChooser fileChooser = new FileChooser();
 
@@ -45,6 +49,10 @@ public class FTPController extends AbstractLoggedController {
 
     @FXML
     private Button getFileButton;
+
+    public FTPController() {
+        setLogger(log);
+    }
 
     @FXML
     void initialize() {
@@ -80,7 +88,7 @@ public class FTPController extends AbstractLoggedController {
             }
         } catch (FtpSendFileException e) {
             log("Загрезка файла не удалась. Причина: " + e.getMessage());
-            e.printStackTrace();
+            log.error("", e);
         }
     }
 
@@ -100,7 +108,7 @@ public class FTPController extends AbstractLoggedController {
             }
         } catch (FtpRetrieveFileException e) {
             log("Ошибка выгрузки: " + e.getMessage());
-            e.printStackTrace();
+            log.error("", e);
         }
     }
 
