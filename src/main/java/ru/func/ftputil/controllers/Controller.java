@@ -1,6 +1,5 @@
 package ru.func.ftputil.controllers;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -8,10 +7,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.apache.commons.net.ftp.FTPClient;
-import ru.func.ftputil.exceptions.FtpConnectException;
-import ru.func.ftputil.exceptions.FtpLoginException;
-import ru.func.ftputil.exceptions.FtpSetTypeFileException;
+import ru.func.ftputil.services.FtpService;
+import ru.func.ftputil.services.exceptions.*;
+
+import java.io.IOException;
 
 public class Controller extends AbstractLoggedController {
 
@@ -19,7 +18,7 @@ public class Controller extends AbstractLoggedController {
 
     private static final int TYPE_FILE = 2;
 
-    private FTPClient client;
+    private FtpService service;
 
     private Stage stage;
 
@@ -50,32 +49,37 @@ public class Controller extends AbstractLoggedController {
             } catch (FtpLoginException e) {
                 log("Ошибка авторизации: " + e.getMessage());
                 e.printStackTrace();
-            } catch (FtpSetTypeFileException e) {
+            } catch (FtpSetupConnectionException e) {
                 log("Ошибка настройки типа данных: " + e.getMessage());
                 e.printStackTrace();
+            } catch (FtpServiceException e) {
+                log("Не известная ошибка: " + e.getMessage());
+                e.printStackTrace();
             } finally {
-                disconnect();
+                try {
+                    service.disconnect();
+                } catch (FtpDisconnectException e) {
+                    log("Ошибка авто-отключения: " + e.getMessage());
+                    e.printStackTrace();
+                }
             }
         });
     }
 
-    public void setClient(FTPClient client) {
-        this.client = client;
+    public void setFtpService(FtpService service) {
+        this.service = service;
     }
 
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
-    private void openConnect() throws FtpConnectException, FtpLoginException, FtpSetTypeFileException {
+    private void openConnect() throws FtpServiceException {
         log("Попытка соеденения по стандартному порту.");
         connect(hostInput.getText());
 
-        if (login(userInput.getText(), passwordInput.getText())) {
-            client.enterLocalPassiveMode();
-            setTypeFile();
-            client.enterLocalPassiveMode();
-            client.setAutodetectUTF8(true);
+        if (service.login(userInput.getText(), passwordInput.getText())) {
+            service.setupConnection();
 
             FXMLLoader loader;
             try {
@@ -85,7 +89,7 @@ public class Controller extends AbstractLoggedController {
                 log("Ошибка инициализации окна: " + e.getMessage());
                 e.printStackTrace();
 
-                disconnect();
+                service.disconnect();
                 return;
             }
 
@@ -93,7 +97,7 @@ public class Controller extends AbstractLoggedController {
 
             FTPController controller = loader.getController();
             controller.setStage(stage);
-            controller.setClient(client);
+            controller.setService(service);
 
             Stage stage = new Stage();
             stage.setScene(new Scene(loader.getRoot()));
@@ -105,41 +109,9 @@ public class Controller extends AbstractLoggedController {
 
     private void connect(String host) throws FtpConnectException {
         try {
-            client.connect(host);
-        } catch (IOException e1) {
-            try {
-                client.connect(host, SECOND_DEFAULT_PORT);
-            } catch (IOException e2) {
-                throw new FtpConnectException(e2);
-            }
-        }
-    }
-
-    private boolean login(String login, String password) throws FtpLoginException {
-        try {
-            return client.login(login, password);
-        } catch (IOException e) {
-            throw new FtpLoginException(e);
-        }
-    }
-
-    private void setTypeFile() throws FtpSetTypeFileException {
-        try {
-            client.setFileType(TYPE_FILE);
-        } catch (IOException e) {
-            throw new FtpSetTypeFileException(e);
-        }
-    }
-
-    private void disconnect() {
-        try {
-            if (client.isConnected()) {
-                client.logout();
-                client.disconnect();
-            }
-        } catch (IOException ex) {
-            log("Ошибка авто-отключения: " + ex.getMessage());
-            ex.printStackTrace();
+            service.connect(host);
+        } catch (FtpConnectException e1) {
+            service.connect(host, SECOND_DEFAULT_PORT);
         }
     }
 }

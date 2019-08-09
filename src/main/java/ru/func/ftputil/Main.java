@@ -5,8 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import org.apache.commons.net.ftp.FTPClient;
 import ru.func.ftputil.controllers.Controller;
+import ru.func.ftputil.services.FtpService;
 
 public class Main extends Application {
     private static long startTime;
@@ -17,7 +17,7 @@ public class Main extends Application {
 
         Controller controller = loader.getController();
         controller.setStage(primaryStage);
-        controller.setClient(new FTPClient());
+        controller.setFtpService(new FtpService());
 
         primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));
