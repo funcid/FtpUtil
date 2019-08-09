@@ -17,17 +17,17 @@
          <children>
             <ImageView fitHeight="123.0" fitWidth="283.0" layoutX="-43.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../FtpUtilProject/src/main/resources/views/assets/apache-logo.png" />
+                  <Image url="@assets/apache-logo.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="126.0" fitWidth="246.0" layoutX="197.0" layoutY="29.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../FtpUtilProject/src/main/resources/views/assets/ftp-diagram.png" />
+                  <Image url="@assets/ftp-diagram.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="155.0" fitWidth="246.0" layoutX="387.0" layoutY="17.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../../../../FtpUtilProject/src/main/resources/views/assets/1__FFpkCWD-KwQmc7oevCRBQ.png" />
+                  <Image url="@assets/1__FFpkCWD-KwQmc7oevCRBQ.png" />
                </image>
             </ImageView>
             <Label layoutX="791.0" layoutY="57.0" prefHeight="101.0" prefWidth="290.0" text="Фтп Утилита" textFill="#d3eeff">
