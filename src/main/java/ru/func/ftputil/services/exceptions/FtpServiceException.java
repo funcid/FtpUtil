@@ -2,7 +2,7 @@ package ru.func.ftputil.services.exceptions;
 
 public class FtpServiceException extends Exception {
 
-    public FtpServiceException(Throwable cause) {
+    FtpServiceException(final Throwable cause) {
         super(cause);
     }
 

@@ -16,7 +16,7 @@ import java.io.IOException;
 
 public class Controller extends AbstractLoggedController {
 
-    private static final Logger log = LoggerFactory.getLogger(Controller.class);
+    private final Logger log = LoggerFactory.getLogger(Controller.class);
 
     private static final int SECOND_DEFAULT_PORT = 2221;
 
@@ -47,27 +47,26 @@ public class Controller extends AbstractLoggedController {
     void initialize() {
         openConnectionButton.setOnAction(event -> {
             try {
-                if (hostInput.getText().isEmpty()) {
+                if (hostInput.getText().isEmpty())
                     return;
-                }
 
                 openConnect();
-            } catch (FtpConnectException e) {
+            } catch (final FtpConnectException e) {
                 log("Ошибка подключения: " + e.getMessage());
                 log.error("", e);
-            } catch (FtpLoginException e) {
+            } catch (final FtpLoginException e) {
                 log("Ошибка авторизации: " + e.getMessage());
                 log.error("", e);
-            } catch (FtpSetupConnectionException e) {
+            } catch (final FtpSetupConnectionException e) {
                 log("Ошибка настройки типа данных: " + e.getMessage());
                 log.error("", e);
-            } catch (FtpServiceException e) {
+            } catch (final FtpServiceException e) {
                 log("Не известная ошибка: " + e.getMessage());
                 log.error("", e);
             } finally {
                 try {
                     service.disconnect();
-                } catch (FtpDisconnectException e) {
+                } catch (final FtpDisconnectException e) {
                     log("Ошибка авто-отключения: " + e.getMessage());
                     log.error("", e);
                 }
@@ -77,11 +76,11 @@ public class Controller extends AbstractLoggedController {
         clearButton.setOnAction(event -> loggerView.clear());
     }
 
-    public void setFtpService(FtpService service) {
+    public void setFtpService(final FtpService service) {
         this.service = service;
     }
 
-    public void setStage(Stage stage) {
+    public void setStage(final Stage stage) {
         this.stage = stage;
     }
 
@@ -92,7 +91,7 @@ public class Controller extends AbstractLoggedController {
         if (service.login(userInput.getText(), passwordInput.getText())) {
             service.setupConnection();
 
-            FXMLLoader loader;
+            final FXMLLoader loader;
             try {
                 loader = new FXMLLoader(getClass().getResource("/views/app.fxml"));
                 loader.load();
@@ -106,19 +105,18 @@ public class Controller extends AbstractLoggedController {
 
             openConnectionButton.getScene().getWindow().hide();
 
-            FTPController controller = loader.getController();
+            final FTPController controller = loader.getController();
             controller.setStage(stage);
             controller.setService(service);
 
-            Stage stage = new Stage();
+            final Stage stage = new Stage();
             stage.setScene(new Scene(loader.getRoot()));
             stage.showAndWait();
-        } else {
+        } else
             log("Неверные данные.");
-        }
     }
 
-    private void connect(String host) throws FtpConnectException {
+    private void connect(final String host) throws FtpConnectException {
         try {
             service.connect(host);
         } catch (FtpConnectException e1) {

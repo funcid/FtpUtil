@@ -10,7 +10,7 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class AbstractLoggedController {
 
-    private static final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault());
+    private final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault());
 
     @FXML
     protected TextArea loggerView;
@@ -22,7 +22,7 @@ public abstract class AbstractLoggedController {
         loggerView.appendText("[" + DTF.format(Instant.now()) + "] " + text + "\n");
     }
 
-    public void setLogger(Logger logger) {
+    void setLogger(Logger logger) {
         this.logger = logger;
     }
 }

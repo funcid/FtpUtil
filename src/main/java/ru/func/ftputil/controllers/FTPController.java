@@ -98,16 +98,16 @@ public class FTPController extends AbstractLoggedController {
         deleteFileButton.setOnAction(event -> removeServerFile(fileInput.getText()));
     }
 
-    void setStage(Stage stage) {
+    void setStage(final Stage stage) {
         this.stage = stage;
     }
 
-    void setService(FtpService service) {
+    void setService(final FtpService service) {
         this.service = service;
     }
 
-    private void sendFileToServerByPath(String uploadDir, String path) {
-        File sendingFile = new File(path);
+    private void sendFileToServerByPath(final String uploadDir, final String path) {
+        final File sendingFile = new File(path);
         if (!sendingFile.exists()) {
             log("Ошибка: файла \"" + path + "\" не существует");
             return;
@@ -115,19 +115,15 @@ public class FTPController extends AbstractLoggedController {
 
         log("Началась загрузка файла на сервер.");
         try {
-            if (service.sendFile(uploadDir + "/" + sendingFile.getName(), sendingFile)) {
-                log("Загрузка завершена успешно.");
-            } else {
-                log("Загрезка файла не удалась.");
-            }
-        } catch (FtpSendFileException e) {
+            log(service.sendFile(uploadDir + "/" + sendingFile.getName(), sendingFile) ? "Загрузка завершена успешно." : "Загрезка файла не удалась.");
+        } catch (final FtpSendFileException e) {
             log("Загрезка файла не удалась. Причина: " + e.getMessage());
             log.error("", e);
         }
     }
 
-    private void getFileFromServerByPath(String path, String loadDir) {
-        File localFile = new File(loadDir, getFileNameFromPath(path));
+    private void getFileFromServerByPath(final String path, final String loadDir) {
+        final File localFile = new File(loadDir, getFileNameFromPath(path));
         if (localFile.exists()) {
             log("Файл уже существует");
             return;
@@ -135,32 +131,23 @@ public class FTPController extends AbstractLoggedController {
 
         log("Начало выгрузки...");
         try {
-            if (service.retrieveFile(localFile, path)) {
-                log("Файл ушспешно скачан.");
-            } else {
-                log("Файл не выгружен.");
-            }
-        } catch (FtpRetrieveFileException e) {
+            log(service.retrieveFile(localFile, path) ? "Файл ушспешно скачан." : "Файл не выгружен.");
+        } catch (final FtpRetrieveFileException e) {
             log("Ошибка выгрузки: " + e.getMessage());
             log.error("", e);
         }
     }
 
     private void removeServerFile(final String path) {
-        if (service.removeServerFile(path)) {
-            log("Файл был успешно удален.");
-        } else {
-            log("Ошибка удаления файла.");
-        }
+        log(service.removeServerFile(path) ? "Файл был успешно удален." : "Ошибка удаления файла.");
     }
 
     private String getFileNameFromPath(final String path) {
-        Matcher matcher = Pattern.compile("/(.+?)$").matcher(path);
-        if (matcher.find()) {
+        final Matcher matcher = Pattern.compile("/(.+?)$").matcher(path);
+        if (matcher.find())
             return matcher.group(1);
-        } else {
+        else
             throw new RuntimeException("Что-то пошло не так: не могу получить имя файла из \"" + path + "\"");
-        }
     }
 }
 

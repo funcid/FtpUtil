@@ -10,13 +10,13 @@ import ru.func.ftputil.services.FtpService;
 
 public class Main extends Application {
 
-    public void start(Stage primaryStage) throws Exception {
-        long startTime = System.currentTimeMillis();
+    public void start(final Stage primaryStage) throws Exception {
+        final long startTime = System.currentTimeMillis();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/sample.fxml"));
-        Parent root = loader.load();
+        final FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/sample.fxml"));
+        final Parent root = loader.load();
 
-        Controller controller = loader.getController();
+        final Controller controller = loader.getController();
         controller.setStage(primaryStage);
         controller.setFtpService(new FtpService());
 
@@ -25,14 +25,14 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        long endTime = System.currentTimeMillis();
+        final long endTime = System.currentTimeMillis();
         controller.log(String.format(
                 "Запуск программы, завершенно (%.2fs).",
                 (endTime - startTime) / 1000D
         ));
     }
 
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         Main.launch((String[])args);
     }
 }
