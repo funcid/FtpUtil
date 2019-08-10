@@ -2,7 +2,7 @@ package ru.func.ftputil.services.exceptions;
 
 public class FtpSendFileException extends FtpServiceException {
 
-    public FtpSendFileException(String message) {
+    public FtpSendFileException(final String message) {
         super(message);
     }
 

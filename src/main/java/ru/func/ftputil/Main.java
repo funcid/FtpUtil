@@ -13,6 +13,7 @@ import ru.func.ftputil.services.FtpServiceImpl;
 public class Main extends Application {
 
     public void start(final Stage primaryStage) throws Exception {
+
         final long startTime = System.currentTimeMillis();
 
         final FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/sample.fxml"));
@@ -20,13 +21,7 @@ public class Main extends Application {
 
         final Controller controller = loader.getController();
         controller.setStage(primaryStage);
-        FtpService ftpService;
-        if (Boolean.parseBoolean(System.getProperty("ftpfake", "false"))) {
-            ftpService = new FtpServiceFake();
-        } else {
-            ftpService = new FtpServiceImpl();
-        }
-        controller.setFtpService(ftpService);
+        controller.setFtpService(Boolean.parseBoolean(System.getProperty("ftpfake", "false")) ? new FtpServiceFake() : new FtpServiceImpl());
 
         primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));

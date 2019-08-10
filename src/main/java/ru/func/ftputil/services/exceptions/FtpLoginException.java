@@ -2,7 +2,7 @@ package ru.func.ftputil.services.exceptions;
 
 public class FtpLoginException extends FtpServiceException {
 
-    public FtpLoginException(String message) {
+    public FtpLoginException(final String message) {
         super(message);
     }
 

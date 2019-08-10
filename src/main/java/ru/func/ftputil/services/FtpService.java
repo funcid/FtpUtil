@@ -6,23 +6,23 @@ import java.io.File;
 
 public interface FtpService {
 
-    void connect(String host) throws FtpConnectException;
+    void connect(final String host) throws FtpConnectException;
 
-    void connect(String host, int port) throws FtpConnectException;
+    void connect(final String host, final int port) throws FtpConnectException;
 
-    boolean login(String login, String password) throws FtpLoginException;
+    boolean login(final String login, final String password) throws FtpLoginException;
 
     void setupConnection() throws FtpSetupConnectionException;
 
-    boolean sendFile(String uploadPath, File sendingFile) throws FtpSendFileException;
+    boolean sendFile(final String uploadPath, final File sendingFile) throws FtpSendFileException;
 
-    boolean retrieveFile(File localFile, String remoteFilePath) throws FtpRetrieveFileException;
+    boolean retrieveFile(final File localFile, final String remoteFilePath) throws FtpRetrieveFileException;
 
     void disconnect() throws FtpDisconnectException;
 
-    String[] listDirNames(String dir);
+    String[] listDirNames(final String dir);
 
-    String[] listFileNames(String dir);
+    String[] listFileNames(final String dir);
 
-    boolean removeServerFile(String path);
+    boolean removeServerFile(final String path);
 }
