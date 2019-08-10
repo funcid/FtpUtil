@@ -112,7 +112,8 @@ public class FTPController extends AbstractLoggedController {
 
         log("Началась загрузка файла на сервер.");
         try {
-            log(service.sendFile(uploadDir + "/" + sendingFile.getName(), sendingFile) ? "Загрузка завершена успешно." : "Загрезка файла не удалась.");
+            final long startTime = System.currentTimeMillis();
+            log(service.sendFile(uploadDir + "/" + sendingFile.getName(), sendingFile) ? "Загрузка завершена успешно. (" + (System.currentTimeMillis() - startTime)/1000D + "s)." : "Загрезка файла не удалась.");
         } catch (final FtpSendFileException e) {
             log("Загрезка файла не удалась. Причина: " + e.getMessage());
             log.error("", e);
@@ -126,9 +127,10 @@ public class FTPController extends AbstractLoggedController {
             return;
         }
 
+        final long startTime = System.currentTimeMillis();
         log("Начало выгрузки...");
         try {
-            log(service.retrieveFile(localFile, path) ? "Файл ушспешно скачан." : "Файл не выгружен.");
+            log(service.retrieveFile(localFile, path) ? "Файл успешно скачан (" + (System.currentTimeMillis() - startTime)/1000D + "s)." : "Файл не выгружен.");
         } catch (final FtpRetrieveFileException e) {
             log("Ошибка выгрузки: " + e.getMessage());
             log.error("", e);
@@ -136,7 +138,8 @@ public class FTPController extends AbstractLoggedController {
     }
 
     private void removeServerFile(final String path) {
-        log(service.removeServerFile(path) ? "Файл был успешно удален." : "Ошибка удаления файла.");
+        final long startTime = System.currentTimeMillis();
+        log(service.removeServerFile(path) ? "Файл был успешно удален (" + (System.currentTimeMillis() - startTime)/1000D + "s)." : "Ошибка удаления файла.");
     }
 
     private String getFileNameFromPath(final String path) {
