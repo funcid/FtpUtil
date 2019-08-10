@@ -62,12 +62,12 @@ public class FtpServiceFake implements FtpService {
 
     @Override
     public String[] listDirNames(final String dir) {
-        return dir.toLowerCase().contains("empty") ? new String[0] : new String[]{"dir_1", "dir_2", "dir_3"};
+        return dir.toLowerCase().contains("empty") ? new String[0] : new String[] {"dir_1", "dir_2", "dir_3"};
     }
 
     @Override
     public String[] listFileNames(final String dir) {
-        return dir.toLowerCase().contains("empty") ? new String[0] : new String[]{"file_1", "file_2", "file_3"};
+        return dir.toLowerCase().contains("empty") ? new String[0] : new String[] {"file_1", "file_2", "file_3"};
     }
 
     @Override

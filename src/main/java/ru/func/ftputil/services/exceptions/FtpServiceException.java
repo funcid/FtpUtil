@@ -2,7 +2,7 @@ package ru.func.ftputil.services.exceptions;
 
 public class FtpServiceException extends Exception {
 
-    FtpServiceException(String message) {
+    FtpServiceException(final String message) {
         super(message);
     }
 
@@ -12,10 +12,6 @@ public class FtpServiceException extends Exception {
 
     @Override
     public String getMessage() {
-        if (getCause() != null) {
-            return getCause().getMessage();
-        } else {
-            return super.getMessage();
-        }
+        return getCause() != null ? getCause().getMessage() : super.getMessage();
     }
 }
