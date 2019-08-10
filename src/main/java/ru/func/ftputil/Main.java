@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ru.func.ftputil.controllers.Controller;
-import ru.func.ftputil.services.FtpService;
+import ru.func.ftputil.services.FtpServiceImpl;
 
 public class Main extends Application {
 
@@ -18,7 +18,7 @@ public class Main extends Application {
 
         final Controller controller = loader.getController();
         controller.setStage(primaryStage);
-        controller.setFtpService(new FtpService());
+        controller.setFtpService(new FtpServiceImpl());
 
         primaryStage.setTitle("Проект Артема Царюка 10 класс");
         primaryStage.setScene(new Scene(root, 1080.0, 720.0));

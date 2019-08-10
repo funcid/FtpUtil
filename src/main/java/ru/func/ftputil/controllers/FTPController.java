@@ -6,7 +6,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import org.apache.commons.net.ftp.FTPFile;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.func.ftputil.services.FtpService;
@@ -14,11 +13,9 @@ import ru.func.ftputil.services.exceptions.FtpRetrieveFileException;
 import ru.func.ftputil.services.exceptions.FtpSendFileException;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class FTPController extends AbstractLoggedController {
 
