@@ -6,7 +6,8 @@
 ## Сборка и запуск
 
 ```shell
-mvn clean javafx:run
+mvn clean package
+java -jar ftputil-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 ### Запуск с фейковым FTP клиентом
@@ -14,7 +15,7 @@ mvn clean javafx:run
 Такой клиент треубется для ручного тестирования пользовательского интерфейса.
 
 ```shell
-mvn clean javafx:run -Dftpfake=true
+java -Dftpfake=true -jar ftputil-1.0-SNAPSHOT-jar-with-dependencies.jar
 ```
 
 #### Ключевые слова для управления фейковым клиентом
@@ -52,5 +53,3 @@ mvn clean javafx:run -Dftpfake=true
 Удаление удалённого файла/Remove remote file:
 
 - наличие слова _"false"_ в пути удалённого файла (remote path), будет провоцировать **отказ удаления файла**.
-
- 
