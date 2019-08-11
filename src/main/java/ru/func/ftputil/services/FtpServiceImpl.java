@@ -88,7 +88,7 @@ public class FtpServiceImpl implements FtpService {
             final String[] names = Stream.of(client.listDirectories(dir))
                     .map(FTPFile::getName)
                     .toArray(String[]::new);
-            return names.length == 0 ? new String[] {"Директория не содержит поддеректорий."} : names;
+            return names.length == 0 ? new String[] {"Директория не содержит подкаталогов."} : names;
         } catch (final IOException e) {
             e.printStackTrace();
         }

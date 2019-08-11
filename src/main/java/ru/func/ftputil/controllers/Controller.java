@@ -119,7 +119,7 @@ public class Controller extends AbstractLoggedController {
     private void connect(final String host) throws FtpConnectException {
         try {
             service.connect(host);
-        } catch (FtpConnectException e1) {
+        } catch (final FtpConnectException ex) {
             service.connect(host, SECOND_DEFAULT_PORT);
         }
     }
