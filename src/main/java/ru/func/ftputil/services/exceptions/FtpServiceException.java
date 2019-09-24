@@ -1,5 +1,8 @@
 package ru.func.ftputil.services.exceptions;
 
+/**
+ * @author func 01.09.2019
+ */
 public class FtpServiceException extends Exception {
 
     FtpServiceException(final String message) {

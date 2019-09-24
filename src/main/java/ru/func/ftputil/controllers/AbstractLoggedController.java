@@ -8,6 +8,9 @@ import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * @author func 30.08.2019
+ */
 public abstract class AbstractLoggedController {
 
     private final DateTimeFormatter DTF = DateTimeFormatter.ofPattern("HH:mm:ss").withZone(ZoneId.systemDefault());

@@ -10,6 +10,9 @@ import ru.func.ftputil.services.FtpService;
 import ru.func.ftputil.services.FtpServiceFake;
 import ru.func.ftputil.services.FtpServiceImpl;
 
+/**
+ * @author func 01.09.2019
+ */
 public class Main extends Application {
 
     public void start(final Stage primaryStage) throws Exception {

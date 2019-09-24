@@ -4,6 +4,9 @@ import ru.func.ftputil.services.exceptions.*;
 
 import java.io.File;
 
+/**
+ * @author func 01.09.2019
+ */
 public class FtpServiceFake implements FtpService {
 
     private String host;

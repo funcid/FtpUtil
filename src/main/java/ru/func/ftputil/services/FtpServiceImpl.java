@@ -10,6 +10,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.stream.Stream;
 
+/**
+ * @author func 01.09.2019
+ */
 public class FtpServiceImpl implements FtpService {
 
     private static final int DEFAULT_FTP_PORT = 21;

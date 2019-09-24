@@ -14,6 +14,9 @@ import ru.func.ftputil.services.exceptions.*;
 
 import java.io.IOException;
 
+/**
+ * @author func 30.08.2019
+ */
 public class Controller extends AbstractLoggedController {
 
     private final Logger log = LoggerFactory.getLogger(Controller.class);

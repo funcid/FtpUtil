@@ -17,6 +17,9 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * @author func 30.08.2019
+ */
 public class FTPController extends AbstractLoggedController {
 
     private static final Logger log = LoggerFactory.getLogger(FTPController.class);
