@@ -1,7 +1,7 @@
 <h1 align="center">FTP UTIL</h1>
 <h2 align="center">
-<a href="https://lgtm.com/projects/g/funcid/FtpUtil/context:java"><img alt="Language grade: Java" src="https://img.shields.io/lgtm/grade/java/g/funcid/FtpUtil.svg?logo=lgtm&logoWidth=18"/></a>
-<a href="https://lgtm.com/projects/g/funcid/FtpUtil/context:java"><img alt="Language grade: Java" src="https://img.shields.io/lgtm/grade/java/g/funcid/FtpUtil.svg?logo=lgtm&logoWidth=18"/></a></h2>
+<a href="https://lgtm.com/projects/g/funcid/FtpUtil/context:java"><img alt="Language grade: Java" src="https://img.shields.io/lgtm/grade/java/g/funcid/FtpUtil.svg?logo=lgtm&logoWidth=18"/></a><a href="https://lgtm.com/projects/g/funcid/FtpUtil/alerts/"><img alt="Total alerts" src="https://img.shields.io/lgtm/alerts/g/funcid/FtpUtil.svg?logo=lgtm&logoWidth=18"/></a>
+</h2>
 <hr>
 
 ## Скачать клиент
